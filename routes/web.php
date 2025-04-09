@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\MentorAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('mentor.login');
+});
+
+// Mentor Authentication Routes
+Route::get('/login', [MentorAuthController::class, 'showLoginForm'])->name('mentor.login');
+Route::post('/login', [MentorAuthController::class, 'login']);
+Route::post('/logout', [MentorAuthController::class, 'logout'])->name('mentor.logout');
+
+// Protected Routes
+Route::middleware('auth:mentor')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });

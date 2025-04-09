@@ -40,6 +40,17 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'mentor' => [
+            'driver' => 'session',
+            'provider' => 'mentors',
+        ],
+
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ]
     ],
 
     /*
@@ -65,10 +76,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'mentors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Mentor::class,
+        ]
     ],
 
     /*
