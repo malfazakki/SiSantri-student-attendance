@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.mentor.login');
+    return redirect()->route('auth.mentor.login');
 });
 
 // Mentor Authentication Routes
@@ -33,7 +33,7 @@ Route::middleware('auth:mentor')->group(function () {
     Route::get('/absensi', function () {
         return view('absensi.index');
     })->name('absensi.index');
-    Route::get('sesi', function () {
+    Route::get('/sesi', function () {
         return view('sesi.index');
     })->name('sesi.index');
     Route::get('/report', function () {

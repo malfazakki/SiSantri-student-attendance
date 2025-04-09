@@ -6,18 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MentorAuthController extends Controller {
+class MentorAuthController extends Controller
+{
     /**
      * Show the login form.
      */
-    public function showLoginForm() {
+    public function showLoginForm()
+    {
         return view('auth.mentor.login');
     }
 
     /**
-     * Handle a login request
+     * Handle a login request.
      */
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -30,14 +33,15 @@ class MentorAuthController extends Controller {
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.'
+            'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
 
     /**
      * Log the user out.
      */
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::guard('mentor')->logout();
 
         $request->session()->invalidate();

@@ -5,18 +5,21 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
-{
+class DatabaseSeeder extends Seeder {
     /**
      * Seed the application's database.
      */
-    public function run(): void
-    {
-        // \App\Models\User::factory(10)->create();
+    public function run(): void {
+        $this->call([
+            AngkatanSeeder::class,
+            JurusanSeeder::class,
+            MentorSeeder::class,
+            SesiAbsenSeeder::class,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Then seed tables with foreign key dependencies
+        $this->call([
+            SantriSeeder::class,
+        ]);
     }
 }
