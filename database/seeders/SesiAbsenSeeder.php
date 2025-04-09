@@ -12,26 +12,26 @@ class SesiAbsenSeeder extends Seeder {
      */
     public function run(): void {
         SesiAbsen::create([
-            'nama' => 'Shubuh',
-            'waktu' => '04:30:00',
+            'nama' => 'Produktif 1',
+            'waktu' => '07:00:00',
             'aktif' => true,
         ]);
 
         SesiAbsen::create([
-            'nama' => 'Dzuhur',
-            'waktu' => '12:30:00',
+            'nama' => 'Produktif 2',
+            'waktu' => '13:00:00',
             'aktif' => true,
         ]);
 
         SesiAbsen::create([
-            'nama' => 'Ashar',
-            'waktu' => '15:30:00',
+            'nama' => 'Produktif 3',
+            'waktu' => '16:00:00',
             'aktif' => true,
         ]);
 
         SesiAbsen::create([
-            'nama' => 'Maghrib',
-            'waktu' => '18:00:00',
+            'nama' => 'Produktif 4',
+            'waktu' => '20:00:00',
             'aktif' => true,
         ]);
     }

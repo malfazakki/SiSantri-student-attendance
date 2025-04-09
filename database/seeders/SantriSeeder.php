@@ -18,7 +18,7 @@ class SantriSeeder extends Seeder {
                     $nis = "20" . (20 + $angkatan) . str_pad($jurusan, 2, '0', STR_PAD_LEFT) . str_pad($i, 3, '0', STR_PAD_LEFT);
 
                     Santri::create([
-                        'nama' => "Santri $1 Angkatan {$angkatan} Jurusan {$jurusan}",
+                        'nama' => "Santri {$i} Angkatan {$angkatan} Jurusan {$jurusan}",
                         'nis' => $nis,
                         'angkatan_id' => $angkatan,
                         'jurusan_id' => $jurusan,

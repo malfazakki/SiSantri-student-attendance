@@ -23,7 +23,7 @@ class AbsensiController extends Controller {
      */
     public function create(Request $request) {
         $request->validate([
-            'sesi_absen_id' => 'required|exist:sesi_absens,id',
+            'sesi_absen_id' => 'required|exists:sesi_absens,id',
             'tanggal' => 'required|date',
         ]);
 
@@ -39,7 +39,7 @@ class AbsensiController extends Controller {
             ->get()
             ->keyBy('santri_id');
 
-        return view('absensi.create', compact('sesiAbsen', 'tanggal', 'santris', $existingAbsensis));
+        return view('absensi.create', compact('sesiAbsen', 'tanggal', 'santris', 'existingAbsensis'));
     }
 
     /**
@@ -47,10 +47,10 @@ class AbsensiController extends Controller {
      */
     public function store(Request $request) {
         $request->validate([
-            'sesi_absen_id' => 'required|exist:sesi_absens, id',
+            'sesi_absen_id' => 'required|exists:sesi_absens,id',
             'tanggal' => 'required|date',
             'status' => 'required|array',
-            'status.*' => 'required|in:hadir,izin,sakit,piket'
+            'status.*' => 'required|in:hadir,izin,sakit,alfa,piket'
         ]);
 
         $sesiAbsenId = $request->sesi_absen_id;
