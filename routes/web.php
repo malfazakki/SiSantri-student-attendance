@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\Auth\MentorAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SesiAbsenController;
@@ -33,10 +34,13 @@ Route::middleware('auth:mentor')->group(function () {
     Route::resource('sesi', SesiAbsenController::class);
     Route::patch('/sesi/{sesi}/toggle-active', [SesiAbsenController::class, 'toggleActive'])->name('sesi.toggle-active');
 
+    // Absensi Routes
+    Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
+    Route::post('/absensi/create', [AbsensiController::class, 'create'])->name('absensi.create');
+    Route::post('/absensi/store', [AbsensiController::class, 'store'])->name('absensi.store');
+    Route::get('/absensi/history', [AbsensiController::class, 'history'])->name('absensi.history');
+
     // Placeholder routes for sidebar navigation
-    Route::get('/absensi', function () {
-        return view('absensi.index');
-    })->name('absensi.index');
     Route::get('/report', function () {
         return view('report.index');
     })->name('report.index');

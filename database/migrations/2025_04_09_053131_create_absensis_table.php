@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->foreignId('santri_id')->constrained();
             $table->foreignId("sesi_absen_id")->constrained();
             $table->foreignId('mentor_id')->constrained();
-            $table->enum('status', ['hadir', 'izin', 'sakit', 'alfa', 'piket dapur']);
+            $table->enum('status', ['hadir', 'izin', 'sakit', 'alfa', 'piket']);
             $table->date('tanggal');
             $table->timestamps();
         });
