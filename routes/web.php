@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\MentorAuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('auth.mentor.login');
+    return redirect()->route('mentor.login');
 });
 
 // Mentor Authentication Routes
@@ -25,18 +26,10 @@ Route::post('/logout', [MentorAuthController::class, 'logout'])->name('mentor.lo
 
 // Protected Routes
 Route::middleware('auth:mentor')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Placeholder routes for sidebar navigation
-    Route::get('/absensi', function () {
-        return view('absensi.index');
-    })->name('absensi.index');
-    Route::get('/sesi', function () {
-        return view('sesi.index');
-    })->name('sesi.index');
-    Route::get('/report', function () {
-        return view('report.index');
-    })->name('report.index');
+    Route::get('/absensi', function() { return view('absensi.index'); })->name('absensi.index');
+    Route::get('/sesi', function() { return view('sesi.index'); })->name('sesi.index');
+    Route::get('/report', function() { return view('report.index'); })->name('report.index');
 });
