@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi;
+use App\Models\Angkatan;
+use App\Models\Jurusan;
 use App\Models\Santri;
 use App\Models\SesiAbsen;
 use Illuminate\Http\Request;
@@ -14,8 +16,9 @@ class AbsensiController extends Controller {
      */
     public function index() {
         $sesiAbsens = SesiAbsen::where('aktif', true)->get();
-
-        return view('absensi.index', compact('sesiAbsens'));
+        $angkatans = Angkatan::all();
+        $jurusans = Jurusan::all();
+        return view('absensi.index', compact('sesiAbsens', 'angkatans', 'jurusans'));
     }
 
     /**
@@ -25,13 +28,25 @@ class AbsensiController extends Controller {
         $request->validate([
             'sesi_absen_id' => 'required|exists:sesi_absens,id',
             'tanggal' => 'required|date',
+            'angkatan_id' => 'nullable|exists:angkatans,id',
+            'jurusan_id' => 'nullable|exists:jurusans,id',
         ]);
 
         $sesiAbsen = SesiAbsen::findOrFail($request->sesi_absen_id);
         $tanggal = $request->tanggal;
 
-        // Get all santri
-        $santris = Santri::with(['angkatan', 'jurusan'])->get();
+        // Get santri with filters
+        $santrisQuery = Santri::with(['angkatan', 'jurusan']);
+
+        if ($request->filled('angkatan_id')) {
+            $santrisQuery->where('angkatan_id', $request->angkatan_id);
+        }
+
+        if ($request->filled('jurusan_id')) {
+            $santrisQuery->where('jurusan_id', $request->jurusan_id);
+        }
+
+        $santris = $santrisQuery->get();
 
         // Get existing attendance records for the selected session and date
         $existingAbsensis = Absensi::where('sesi_absen_id', $request->sesi_absen_id)

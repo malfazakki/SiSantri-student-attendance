@@ -8,7 +8,7 @@
     <div class="mb-4 flex justify-between items-center">
         <div>
             <h3 class="text-lg font-semibold">Form Absensi</h3>
-            <p class="text-sm text-gray-500">Pilih sesi dan tanggal untuk melakukan absensi</p>
+            <p class="text-sm text-gray-500">Pilih sesi, tanggal, dan filter untuk melakukan absensi</p>
         </div>
         <a href="{{ route('absensi.history') }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md">
             Lihat Riwayat
@@ -56,6 +56,32 @@
                     @error('tanggal')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label for="angkatan_id" class="block text-sm font-medium text-gray-700 mb-2">Filter Angkatan
+                        (Opsional)</label>
+                    <select name="angkatan_id" id="angkatan_id"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Semua Angkatan</option>
+                        @foreach ($angkatans as $angkatan)
+                            <option value="{{ $angkatan->id }}">{{ $angkatan->nama }} ({{ $angkatan->tahun }})</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label for="jurusan_id" class="block text-sm font-medium text-gray-700 mb-2">Filter Jurusan
+                        (Opsional)</label>
+                    <select name="jurusan_id" id="jurusan_id"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Semua Jurusan</option>
+                        @foreach ($jurusans as $jurusan)
+                            <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
