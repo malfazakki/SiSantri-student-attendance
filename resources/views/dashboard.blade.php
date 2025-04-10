@@ -19,7 +19,7 @@
 
         <div class="bg-white p-6 rounded-lg shadow">
             <h3 class="text-gray-500">Sesi Aktif</h3>
-            <p class="text-3xl font-bold">{{ $totalSesiAktif }}%</p>
+            <p class="text-3xl font-bold">{{ $totalSesiAktif }}</p>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $absensi->sesiAbsen->nama }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
-                                    class="px-2 py-1 {{ $absensi->status === 'hadir' ? 'bg-green-100 text-green-800' : ($absensi->status === 'izin' || $absensi->status === 'sakit' || $absensi->status === 'piket dapur' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }} rounded-full text-xs">{{ ucfirst($absensi->status) }}</span>
+                                    class="px-2 py-1 {{ $absensi->status === 'hadir' ? 'bg-green-100 text-green-800' : ($absensi->status === 'izin' || $absensi->status === 'sakit' || $absensi->status === 'piket' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }} rounded-full text-xs">{{ ucfirst($absensi->status) }}</span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{ $absensi->created_at->format('H:i, d M Y') }}
